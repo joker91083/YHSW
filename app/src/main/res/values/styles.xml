@@ -8,4 +8,33 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.NoTitle" parent="Theme.AppCompat">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item><!--标题栏-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item><!--状态栏-->
+        <item name="colorAccent">@color/colorAccent</item><!--强调色-->
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:colorBackground">@color/colorPrimary</item>
+        <!--下段代码就是去除阴影的-->
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="radiobutton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingLeft">2dp</item>
+        <item name="android:paddingRight">2dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@drawable/selector_text</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:background">@drawable/selector_tab</item>
+    </style>
+
 </resources>
