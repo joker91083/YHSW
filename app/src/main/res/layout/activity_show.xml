@@ -330,7 +330,7 @@
                 android:lines="1"
                 android:background="@color/grey_bg"
                 android:textColor="@color/grey"
-                android:text="----------------------------------------"/>
+                android:text="---------------------------------------------------------------------------------------------------------------------------------------------------------------------"/>
 
             <TextView
                 android:layout_width="match_parent"

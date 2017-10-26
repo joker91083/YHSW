@@ -148,7 +148,7 @@ public class YhswFragment extends Fragment {
      * 获取数据
      */
     private void getData() {
-        InputStream inputStream = getResources().openRawResource(R.raw.bioloaagy);
+        InputStream inputStream = getResources().openRawResource(R.raw.biology);
         InputStreamReader inputStreamReader = null;
         try {
             inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
