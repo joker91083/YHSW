@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.titan.model.Pest;
 import com.titan.yhsw.adapter.MyFragmentPagerAdapter;
 import com.titan.yhsw.fragment.JzswFragment;
 import com.titan.yhsw.fragment.WhzzFragment;
@@ -37,6 +38,14 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     RadioButton mRb_jzsw;
     @BindView(R.id.vp_identify)
     ViewPager mVp_identify;
+
+
+    public List<Pest> getQueryPests() {
+        return queryPests;
+    }
+
+    //查看结果
+    private  List<Pest> queryPests = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

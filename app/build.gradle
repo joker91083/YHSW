@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+// In your app projects build.gradle file:
+//apply plugin: 'org.greenrobot.greendao' // apply plugin
 
 android {
     compileSdkVersion 25
@@ -10,12 +12,25 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //向上兼容矢量动画
+        vectorDrawables.useSupportLibrary = true
     }
+    /*greendao {
+        //当前数据库版本
+        schemaVersion 1
+        //由GreenDao自动生成代码所在的包名，默认的是在项目包下面新建一个gen。
+        daoPackage 'com.titan.data.greendao'
+        //设置自动生成代码的目录
+        targetGenDir 'src/main/java'
+    }*/
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    dataBinding{
+        enabled true
     }
 }
 
@@ -30,5 +45,15 @@ dependencies {
     compile 'com.android.support:design:25.1.1'
     compile 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
-    compile 'com.google.code.gson:gson:2.4'
+    compile 'com.google.code.gson:gson:2.7'
+
+    /** rx */
+    compile 'io.reactivex:rxandroid:1.2.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+
+    compile 'org.greenrobot:greendao:3.2.2' // add library
+
+
+
+
 }

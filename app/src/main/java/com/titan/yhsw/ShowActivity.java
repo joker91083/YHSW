@@ -1,13 +1,18 @@
 package com.titan.yhsw;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.titan.model.Pest;
+import com.titan.yhsw.databinding.ActivityShowBinding;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * 条目详情
@@ -39,17 +44,32 @@ public class ShowActivity extends AppCompatActivity {
     @BindView(R.id.tv_control)
     TextView mTv_control;
 
+    private ActivityShowBinding binding;
+    //
+    private  Pest pest;
+    private Context mContext;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show);
+        mContext=this;
+        binding=DataBindingUtil.setContentView(this,R.layout.activity_show);
+        //setContentView(R.layout.activity_show);
+        try {
+            pest = (Pest) getIntent().getSerializableExtra("pest");
+            binding.setPest(pest);
 
-        ButterKnife.bind(this);
+        }catch (Exception e){
+            Toast.makeText(mContext,"初始化数据异常"+e,Toast.LENGTH_LONG);
+        }
+        //ButterKnife.bind(this);
 
-        initView();
+        //initView();
     }
 
     private void initView() {
+
         Biology biology = (Biology)getIntent().getSerializableExtra("Biology");
         mTv_title.setText(biology.getCNAME());
 
