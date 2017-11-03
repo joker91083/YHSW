@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Vibrator;
 import android.util.Log;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.titan.data.source.local.DaoManager;
 import com.titan.util.FileUtil;
 
@@ -37,13 +38,18 @@ public class TitanApplication extends Application {
     Vibrator mVibrator;
     static Context mContext;
     public  static  TitanApplication singleton;
+
     //初始化数据库名
     public static String DBNAME="db_pest.sqlite";
     //初始化图片文件
     public static String IMGS="imgs";
+    //初始化图片文件
+    public static String DB="db";
 
 
     public static String dbpath="";
+    public static String imgpath="";
+
 
 
     /** 数据存储路径 */
@@ -94,23 +100,37 @@ public class TitanApplication extends Application {
         //WilddogOptions options = new WilddogOptions.Builder().setSyncUrl("https://"+WILDDOG_VIDEO_ID+".wilddogio.com").build();
         //WilddogApp.initializeApp(this,options);
         //intiData();
+        //图片加载库初始化
+        Fresco.initialize(this);
         mSharedPreferences=getSharedPreferences(PREFS_NAME,0);
         iniiData();
         /** 获取当前网络状态 */
         //数据库初始化
-        DaoManager.getInstance(dbpath);
+        DaoManager.getInstance(dbpath+"/"+DBNAME);
     }
 
     /**
      * 初始化数据
      */
     private void iniiData() {
-        dbpath=mContext.getDatabasePath(DBNAME).getAbsolutePath();
-        String imgpath=mContext.getDatabasePath(IMGS).getAbsolutePath();
+        //Environment.getExternalStorageDirectory().getPath()
+        dbpath=mContext.getDatabasePath(DB).getPath();
+        imgpath=mContext.getDatabasePath(IMGS).getPath();
+       /* dbpath=mContext.getFilesDir().getAbsolutePath()+"/"+DBNAME;
+        imgpath=mContext.getFilesDir().getAbsolutePath()+"/"+IMGS;*/
+        /*dbpath=mContext.getExternalFilesDir(DB).getAbsolutePath()+"/"+DBNAME;
+        imgpath=mContext.getExternalFilesDir(IMGS).getAbsolutePath();*/
+
+        /*dbpath=mContext.getExternalCacheDir().getPath();
+        imgpath=mContext.getExternalCacheDir().getPath()+"/"+IMGS;*/
+
+
+        /*dbpath=mContext.getFilesDir().getAbsolutePath()+"/"+DBNAME;
+        imgpath=mContext.getFilesDir().getAbsolutePath()+"/"+IMGS;*/
         //Log.e("initdb",dbpath);
         try {
             //初始化数据库
-            FileUtil.copyAssetstoLoc(mContext,dbpath,DBNAME);
+            FileUtil.copyAssetstoLoc(mContext,dbpath+"/"+TitanApplication.DBNAME,DBNAME);
             //初始化图片库
             FileUtil.copyAssetstoLoc(mContext,imgpath,IMGS);
         } catch (IOException e) {

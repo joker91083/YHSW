@@ -3,6 +3,7 @@ package com.titan.util;
 import android.content.Context;
 import android.content.res.AssetManager;
 
+import com.titan.TitanApplication;
 import com.titan.yhsw.R;
 
 import java.io.File;
@@ -21,8 +22,11 @@ public class FileUtil {
      */
     public static void copyAssetstoLoc(Context context,String filename, String assetPath) throws IOException {
         File file = new File(filename);
-        if (file.exists()) {
+        if (file.isFile()&&file.exists()) {
             return;
+        }else {
+            File filedir=new File(TitanApplication.dbpath);
+            boolean ismake=filedir.mkdirs();
         }
         AssetManager assetManager=context.getAssets();
         //判断是拷贝的是文件还是文件夹

@@ -1,6 +1,7 @@
 package com.titan.yhsw.adapter;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.titan.model.Pest;
 import com.titan.yhsw.R;
 
@@ -45,18 +47,22 @@ public class PestAdapter extends RecyclerView.Adapter<PestAdapter.MyViewHolder> 
         holder.mTv_door.setText(mDates.get(position).getPhylum());
         holder.mTv_feature.setText(mDates.get(position).getFeature());
         if(mDates.get(position).isHasimg()){
-            holder.iv_img.setImageBitmap(mDates.get(position).getBitmap());
+
+            Uri uri= Uri.parse("file://"+mDates.get(position).getImgpath());
+            holder.sdv_img.setImageURI(uri);
+            //holder.sdv_img.setImageBitmap(BitmapFactory.decodeFile(mDates.get(position).getImgpath()));
         }
     }
 
     @Override
     public int getItemCount() {
-        return mDates.size();
+        return mDates==null?0:mDates.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private final ImageView iv_img;
+        //private final ImageView iv_img;
+        private final SimpleDraweeView sdv_img;
         private final TextView mTv_cname;
         private final TextView mTv_ename;
         private final TextView mTv_door;
@@ -68,7 +74,8 @@ public class PestAdapter extends RecyclerView.Adapter<PestAdapter.MyViewHolder> 
         public MyViewHolder(View itemView, MyItemClickListener myItemClickListener) {
             super(itemView);
 
-            iv_img = (ImageView) itemView.findViewById(R.id.iv_pic);
+            //iv_img = (ImageView) itemView.findViewById(R.id.iv_pic);
+            sdv_img = (SimpleDraweeView) itemView.findViewById(R.id.sdv_img);
             mTv_cname = (TextView) itemView.findViewById(R.id.tv_cname);
             mTv_ename = (TextView) itemView.findViewById(R.id.tv_ename);
             mTv_door = (TextView) itemView.findViewById(R.id.tv_door);
@@ -78,6 +85,7 @@ public class PestAdapter extends RecyclerView.Adapter<PestAdapter.MyViewHolder> 
             //将全局的监听赋值给接口
             this.mListener = myItemClickListener;
             mTv_more.setOnClickListener(this);
+            sdv_img.setOnClickListener(this);
         }
 
         /**
@@ -86,7 +94,11 @@ public class PestAdapter extends RecyclerView.Adapter<PestAdapter.MyViewHolder> 
         @Override
         public void onClick(View view) {
             if (mListener != null) {
-                mListener.onItemClick(view, getPosition());
+                if(view instanceof ImageView){
+                    mListener.onImgClick(view,getPosition());
+                }else {
+                    mListener.onItemClick(view, getPosition());
+                }
             }
         }
     }
@@ -96,6 +108,7 @@ public class PestAdapter extends RecyclerView.Adapter<PestAdapter.MyViewHolder> 
      */
     public interface MyItemClickListener {
         void onItemClick(View view, int position);
+        void onImgClick(View view,int position);
     }
 
     /**

@@ -21,6 +21,7 @@ import android.graphics.Bitmap;
 import com.titan.model.Pest;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Main entry point for accessing tasks data.
@@ -58,7 +59,7 @@ public interface LDataSource {
 
 
     //查询病虫害
-    void queryPest(Integer type, String keyword,qureyCalllback callback);
+    void queryPest(Integer type, String keyword, Set<String> whbw, qureyCalllback callback);
 
     //获取病虫害图片
     void getPestImg(String keyword,qureyImgCalllback callback);

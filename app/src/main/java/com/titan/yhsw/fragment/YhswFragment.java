@@ -3,7 +3,6 @@ package com.titan.yhsw.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -26,6 +25,7 @@ import com.titan.data.source.local.LDataSource;
 import com.titan.model.Pest;
 import com.titan.util.TitanFileFilter;
 import com.titan.yhsw.Biology;
+import com.titan.yhsw.ImgDisplayActivity;
 import com.titan.yhsw.MainActivity;
 import com.titan.yhsw.R;
 import com.titan.yhsw.ShowActivity;
@@ -47,7 +47,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by 32 on 2017/10/19.
- * 有害生物识别
+ * 主要有害生物
  */
 
 public class YhswFragment extends Fragment {
@@ -98,21 +98,22 @@ public class YhswFragment extends Fragment {
         //getData();
 
 
-        mTv_select.setOnClickListener(new View.OnClickListener() {
+        /*mTv_select.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String keyword = mEt_keyword.getText().toString();
                 if (keyword.equals("")) {
                     Toast.makeText(mContext, "关键字不能为空", Toast.LENGTH_SHORT).show();
                 } else {
-                    showDatas.clear();
+                    //showDatas.clear();
                     queryPest(keyword);
 
                     //checkData(keyword);
                     //setData();
                 }
             }
-        });
+        });*/
+        queryPest("");
     }
 
     /**
@@ -120,15 +121,15 @@ public class YhswFragment extends Fragment {
      * @param keyword
      */
     private void queryPest(final String keyword) {
-        Injection.provideDataRepository(getActivity()).queryPest(1, keyword, new LDataSource.qureyCalllback() {
+        queryPests.clear();
+        Injection.provideDataRepository(getActivity()).queryPest(1, keyword,null, new LDataSource.qureyCalllback() {
             @Override
             public void onFailure(String info) {
-                Toast.makeText(mContext, "查询失败"+info, Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "查询病虫害失败"+info, Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onSuccess(List<Pest> data) {
-                queryPests.clear();
                 if(data==null||data.isEmpty()){
                     Toast.makeText(mContext, "未找到所需信息", Toast.LENGTH_LONG).show();
 
@@ -141,7 +142,7 @@ public class YhswFragment extends Fragment {
                         for(File f:files){
                             if(f.getName().contains(data.get(i).getCname())){
                                 data.get(i).setHasimg(true);
-                                data.get(i).setBitmap(BitmapFactory.decodeFile(f.getAbsolutePath()));
+                                data.get(i).setImgpath(f.getAbsolutePath());
                             }
                         }
                     }
@@ -200,7 +201,18 @@ public class YhswFragment extends Fragment {
                 Intent intent = new Intent(mContext, ShowActivity.class);
                 //Biology biology = showDatas.get(position);
                 Bundle bundle=new Bundle();
-                bundle.putSerializable("pset",queryPests.get(position));
+                bundle.putSerializable("pest",queryPests.get(position));
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onImgClick(View view, int position) {
+                Intent intent = new Intent(mContext, ImgDisplayActivity.class);
+                //Biology biology = showDatas.get(position);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("pest",queryPests.get(position));
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

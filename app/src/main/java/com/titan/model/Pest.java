@@ -1,14 +1,13 @@
 package com.titan.model;
 
-import android.graphics.Bitmap;
-
 import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
-import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Transient;
 
 import java.io.Serializable;
+
 
 /**
  * Created by whs on 2017/10/26
@@ -68,17 +67,20 @@ public class Pest implements Serializable{
     /**寄主*/
     @Property(nameInDb = "HOST")
     private String host;
+    /**危害部位*/
+    @Property(nameInDb = "WHBW")
+    private String whbw;
     @Transient
-    private Bitmap bitmap;
+    private String imgpath;
 
     @Transient
     private boolean hasimg=false;
 
-    @Generated(hash = 733795870)
+    @Generated(hash = 1362271006)
     public Pest(Long id, String cname, String lname, String ename, String alias,
             String kindom, String phylum, String tclass, String orider,
             String family, String genus, String species, String distribution,
-            String feature, String type, String control, String host) {
+            String feature, String type, String control, String host, String whbw) {
         this.id = id;
         this.cname = cname;
         this.lname = lname;
@@ -96,10 +98,14 @@ public class Pest implements Serializable{
         this.type = type;
         this.control = control;
         this.host = host;
+        this.whbw = whbw;
     }
     @Generated(hash = 495447472)
     public Pest() {
     }
+
+
+
     public Long getId() {
         return this.id;
     }
@@ -203,13 +209,6 @@ public class Pest implements Serializable{
         this.host = host;
     }
 
-    public Bitmap getBitmap() {
-        return bitmap;
-    }
-
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
-    }
 
     public boolean isHasimg() {
         return hasimg;
@@ -217,5 +216,20 @@ public class Pest implements Serializable{
 
     public void setHasimg(boolean hasimg) {
         this.hasimg = hasimg;
+    }
+
+
+    public String getImgpath() {
+        return imgpath;
+    }
+
+    public void setImgpath(String imgpath) {
+        this.imgpath = imgpath;
+    }
+    public String getWhbw() {
+        return this.whbw;
+    }
+    public void setWhbw(String whbw) {
+        this.whbw = whbw;
     }
 }

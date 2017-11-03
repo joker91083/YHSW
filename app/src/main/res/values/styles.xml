@@ -37,4 +37,17 @@
         <item name="android:background">@drawable/selector_tab</item>
     </style>
 
+    <style name="ctv">
+        <item name="android:drawableLeft">?android:attr/listChoiceIndicatorMultiple</item>
+        <item name="android:drawableStart">?android:attr/listChoiceIndicatorMultiple</item>
+    </style>
+    <style name="ctv_whbw">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:drawableLeft">?android:attr/listChoiceIndicatorMultiple</item>
+        <item name="android:drawableStart">?android:attr/listChoiceIndicatorMultiple</item>
+    </style>
+
 </resources>

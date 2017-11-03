@@ -11,7 +11,9 @@ import com.titan.data.greendao.PestDao;
 import com.titan.model.Pest;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import rx.Observable;
 import rx.Observer;
@@ -30,7 +32,6 @@ public class LocalDataSource implements LDataSource {
 
     private static LocalDataSource INSTANCE;
 
-
     private Context mContext;
 
     private LocalDataSource(@NonNull Context context) {
@@ -46,24 +47,41 @@ public class LocalDataSource implements LDataSource {
 
 
     @Override
-    public void queryPest(Integer type, final String keyword, final qureyCalllback callback) {
+    public void queryPest(final Integer type, final String keyword, final Set<String> whbw , final qureyCalllback callback) {
+
         Observable.create(new Observable.OnSubscribe<List<Pest>>() {
             @Override
             public void call(Subscriber<? super List<Pest>> subscriber) {
                 try {
+                    //type 1：有害生物 3：寄主
+                    List<Pest> pestList= new ArrayList<>();
+                    if(whbw==null||whbw.isEmpty()){
+                        if(type==3){
+                            pestList=DaoManager.getInstance(TitanApplication.dbpath+"/"+TitanApplication.DBNAME).getNewSession().getPestDao().queryBuilder()
+                                    .where(PestDao.Properties.Type.eq(type))
+                                    .whereOr(PestDao.Properties.Host.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%"))
+                                    .list();
+                        }else {
+                            pestList=DaoManager.getInstance(TitanApplication.dbpath+"/"+TitanApplication.DBNAME).getNewSession().getPestDao().queryBuilder()
+                                    .where(PestDao.Properties.Type.eq(type))
+                                    .whereOr(PestDao.Properties.Cname.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%")
+                                            ,PestDao.Properties.Ename.like("%"+keyword+"%"),PestDao.Properties.Lname.like("%"+keyword+"%"))
+                                    .list();
+                        }
 
-                  /*  QueryBuilder<Pest> qb= DaoManager.getInstance(TitanApplication.dbpath).getNewSession().getPestDao().queryBuilder();
-                    qb.whereOr(PestDao.Properties.Cname.like(keyword),PestDao.Properties.Alias.like(keyword));
-                    //qb.or(PestDao.Properties.Alias.like(keyword),PestDao.Properties.Alias.like(keyword));
-                    List<Pest> pestlist=qb.list();*/
+
+                    }else {
+                        for(String str:whbw){
+                            List<Pest> sublist=DaoManager.getInstance(TitanApplication.dbpath).getNewSession().getPestDao().queryBuilder()
+                                    .where(PestDao.Properties.Type.eq(type))
+                                    .whereOr(PestDao.Properties.Whbw.like("%"+str+"%"),PestDao.Properties.Cname.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%")
+                                            ,PestDao.Properties.Ename.like("%"+keyword+"%"),PestDao.Properties.Lname.like("%"+keyword+"%"))
+                                    .list();
+                            pestList.addAll(sublist);
+                        }
+                    }
 
 
-
-
-                     List<Pest> pestList=DaoManager.getInstance(TitanApplication.dbpath).getNewSession().getPestDao().queryBuilder()
-                             .whereOr(PestDao.Properties.Cname.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%")
-                                     ,PestDao.Properties.Ename.like("%"+keyword+"%"),PestDao.Properties.Lname.like("%"+keyword+"%"))
-                             .list();
 
 
 
@@ -97,7 +115,7 @@ public class LocalDataSource implements LDataSource {
 
     @Override
     public void getPestImg(final String keyword, final qureyImgCalllback callback) {
-        Observable.from(mContext.getDatabasePath(TitanApplication.IMGS).listFiles())
+        Observable.from(new File(TitanApplication.imgpath).listFiles())
                 .filter(new Func1<File, Boolean>() {
                     @Override
                     public Boolean call(File file) {
@@ -122,42 +140,6 @@ public class LocalDataSource implements LDataSource {
                         callback.onSuccess(bitmap);
                     }
                 });
-        /*Observable.create(new Observable.OnSubscribe<Bitmap>() {
-            @Override
-            public void call(Subscriber<? super Bitmap> subscriber) {
-                try {
 
-                   File[] files=mContext.getDatabasePath(TitanApplication.IMGS).listFiles(new TitanFileFilter.ImgFileFilter());
-                   for (File file:files){
-                       if(file.getName().contains(keyword)){
-                           subscriber.onNext(new Bitmap());
-                       }
-                   }
-
-                   subscriber.onNext(null);
-
-                }catch (Exception e){
-                    subscriber.onError(e);
-                }
-            }}).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Pest>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e("TITAN",e.toString());
-                        callback.onFailure(e.toString());
-
-                    }
-
-                    @Override
-                    public void onNext(List<Pest> pestList) {
-                        callback.onSuccess(pestList);
-                    }
-                });*/
     }
 }

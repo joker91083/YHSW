@@ -59,9 +59,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     private void initView() {
         List<Fragment> fmList = new ArrayList<>();
-        fmList.add(new YhswFragment()); // 有害生物识别
-        fmList.add(new WhzzFragment()); // 症状或危害状识别
-        fmList.add(new JzswFragment()); // 寄主生物识别
+        fmList.add(new YhswFragment()); // 主要有害生物
+        fmList.add(new WhzzFragment()); // 有害生物查询
+        fmList.add(new JzswFragment()); // 寄主生物查询
 
         mVp_identify.addOnPageChangeListener(this);
         mVp_identify.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), fmList));

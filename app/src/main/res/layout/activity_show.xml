@@ -105,7 +105,7 @@
                                 android:layout_marginTop="5dp"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="14sp"
-                                android:text="中文名"/>
+                                android:text="@={pest.cname}"/>
                         </LinearLayout>
 
                         <View
@@ -136,7 +136,7 @@
                                 android:layout_marginTop="5dp"
                                 android:textColor="@color/colorPrimary"
                                 android:textSize="14sp"
-                                android:text="Android"/>
+                                android:text="@={pest.ename}"/>
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
@@ -165,8 +165,7 @@
                     android:layout_marginTop="6dp"
                     android:textColor="@color/grey"
                     android:textSize="14sp"
-                    android:visibility="gone"
-                    android:text=""/>
+                    android:text="@={pest.alias}"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -190,8 +189,7 @@
                     android:layout_marginTop="6dp"
                     android:textColor="@color/grey"
                     android:textSize="14sp"
-                    android:visibility="gone"
-                    android:text=""/>
+                    android:text="@={pest.phylum}"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -206,6 +204,7 @@
                     android:layout_marginTop="6dp"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp"
+                    android:visibility="gone"
                     android:text="采集地址:"/>
 
                 <TextView
@@ -223,6 +222,7 @@
                     android:layout_height="1px"
                     android:layout_marginTop="3dp"
                     android:layout_marginBottom="8dp"
+                    android:visibility="gone"
                     android:background="@color/grey"/>
 
                 <TextView
@@ -240,8 +240,7 @@
                     android:layout_marginTop="6dp"
                     android:textColor="@color/grey"
                     android:textSize="14sp"
-                    android:visibility="gone"
-                    android:text=""/>
+                    android:text="@={pest.distribution}"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -265,8 +264,7 @@
                     android:layout_marginTop="6dp"
                     android:textColor="@color/grey"
                     android:textSize="14sp"
-                    android:visibility="gone"
-                    android:text=""/>
+                    android:text="@={pest.host}"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -290,8 +288,7 @@
                     android:layout_marginTop="6dp"
                     android:textColor="@color/grey"
                     android:textSize="14sp"
-                    android:visibility="gone"
-                    android:text=""/>
+                    android:text="@={pest.feature}"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -315,8 +312,7 @@
                     android:layout_marginTop="6dp"
                     android:textColor="@color/grey"
                     android:textSize="14sp"
-                    android:visibility="gone"
-                    android:text=""/>
+                    android:text="@={pest.control}"/>
 
                 <View
                     android:layout_width="match_parent"

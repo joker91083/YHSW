@@ -5,6 +5,8 @@ import android.content.Context;
 import com.titan.data.source.local.LDataSource;
 import com.titan.data.source.local.LocalDataSource;
 
+import java.util.Set;
+
 /**
  * Created by whs on 2017/5/18
  */
@@ -29,9 +31,10 @@ public class DataRepository implements LDataSource {
         this.mLocalDataSource = localDataSource;
     }
 
+
     @Override
-    public void queryPest(Integer type, String keyword, qureyCalllback callback) {
-        mLocalDataSource.queryPest(type,keyword,callback);
+    public void queryPest(Integer type, String keyword, Set<String> whbw, qureyCalllback callback) {
+        mLocalDataSource.queryPest(type,keyword,whbw,callback);
     }
 
     @Override
