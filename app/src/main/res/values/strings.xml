@@ -1,22 +1,28 @@
 <resources>
-    <string name="app_name">有害生物识别</string>
+    <string name="app_name">有害生物查询</string>
 
-    <string name="yhsw">有害生物识别</string>
-    <string name="whzz">症状或危害状识别</string>
-    <string name="jzsw">寄主生物识别</string>
-    <string name="explain">Copyright 2016 广东省林业有害生物防治检疫管理办公室</string>
+    <string name="yhsw">主要林业有害生物</string>
+    <string name="whzz">林业有害生物查询</string>
+    <string name="jzsw">寄主查询</string>
+    <string name="explain">Copyright 2017 贵州省森林病虫检疫防治站</string>
 
     <string name="keyword">请输入关键字...</string>
     <string name="select">开始查询</string>
     <string name="fuhe">符合条件有</string>
     <string name="jilu">条记录:</string>
 
-    <string name="yhsw_tj">有害生物识别条件</string>
-    <string name="yhsw_ts">提示：可根据昆虫的外形描述，组合关键字</string>
+    <string name="yhsw_tj">林业有害生物查询条件</string>
+    <string name="yhsw_ts">提示：可根据林业有害生物的名称，或组合关键字查询</string>
 
     <string name="whzz_tj">症状或危害状识别条件</string>
     <string name="whzz_ts">提示：可根据症状或危害状的特征，组合关键字</string>
 
-    <string name="jzsw_tj">寄主生物识别条件</string>
+    <string name="jzsw_tj">寄主生物条件</string>
     <string name="jzsw_ts">提示：可根据寄主生物的描述，组合关键字</string>
+
+    <string name="whbw_gs">果实</string>
+    <string name="whbw_yb">叶部</string>
+    <string name="whbw_jb">茎部</string>
+    <string name="whbw_gb">根部</string>
+    <string name="whbw">危害部位:</string>
 </resources>

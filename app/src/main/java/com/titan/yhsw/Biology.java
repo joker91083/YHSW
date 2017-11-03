@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * Created by 32 on 2017/10/20.
- * 查询结果
+ * 有害生物
  */
 
 public class Biology implements Serializable {

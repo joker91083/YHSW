@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import com.titan.model.Pest;
 import com.titan.yhsw.adapter.MyFragmentPagerAdapter;
 import com.titan.yhsw.fragment.JzswFragment;
 import com.titan.yhsw.fragment.WhzzFragment;
@@ -38,6 +39,14 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     @BindView(R.id.vp_identify)
     ViewPager mVp_identify;
 
+
+    public List<Pest> getQueryPests() {
+        return queryPests;
+    }
+
+    //查看结果
+    private  List<Pest> queryPests = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,9 +59,9 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     private void initView() {
         List<Fragment> fmList = new ArrayList<>();
-        fmList.add(new YhswFragment()); // 有害生物识别
-        fmList.add(new WhzzFragment()); // 症状或危害状识别
-        fmList.add(new JzswFragment()); // 寄主生物识别
+        fmList.add(new YhswFragment()); // 主要有害生物
+        fmList.add(new WhzzFragment()); // 有害生物查询
+        fmList.add(new JzswFragment()); // 寄主生物查询
 
         mVp_identify.addOnPageChangeListener(this);
         mVp_identify.setAdapter(new MyFragmentPagerAdapter(getSupportFragmentManager(), fmList));

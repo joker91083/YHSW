@@ -7,6 +7,46 @@
               android:id="@+id/ll_jzsw"
               android:background="@color/grey_bg">
 
+    <RelativeLayout
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:visibility="gone"
+        >
+        <TextView
+            android:id="@+id/tv_whbw"
+            android:text="@string/whbw"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <CheckedTextView
+            android:layout_toRightOf="@+id/tv_whbw"
+            android:id="@+id/ctv_gs"
+            android:text="@string/whbw_gs"
+            style="@style/ctv_whbw" />
+        <CheckedTextView
+            android:id="@+id/ctv_yb"
+            android:layout_toRightOf="@+id/ctv_gs"
+            android:text="@string/whbw_yb"
+            style="@style/ctv_whbw"
+            android:layout_toEndOf="@+id/ctv_gs" />
+        <CheckedTextView
+            android:id="@+id/ctv_jb"
+            android:layout_toRightOf="@+id/ctv_yb"
+            android:text="@string/whbw_jb"
+            style="@style/ctv_whbw"
+            />
+        <CheckedTextView
+            android:id="@+id/ctv_gb"
+            android:layout_toRightOf="@+id/ctv_jb"
+            android:text="@string/whbw_gb"
+            style="@style/ctv_whbw"
+            />
+    </RelativeLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -102,7 +142,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#EEBB17"
-                    android:text=""/>
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
