@@ -45,10 +45,7 @@
     </RelativeLayout>
 
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none">
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,23 +88,13 @@
 
                 <EditText
                     android:id="@+id/et_keyword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:padding="5dp"
-                    android:background="@drawable/selector_bg"
-                    android:gravity="center"
-                    android:textColor="@color/grey"
-                    android:textColorHint="@color/grey_et"
-                    android:textSize="18sp"
+                    style="@style/et_search"
                     android:hint="@string/keyword"/>
 
                 <TextView
                     android:id="@+id/tv_select"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
@@ -115,7 +102,7 @@
                     android:padding="5dp"
                     android:gravity="center"
                     android:background="@drawable/button_select"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     android:textColor="@color/white"
                     android:text="@string/select"/>
             </LinearLayout>
@@ -156,5 +143,4 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"/>
         </LinearLayout>
-    </ScrollView>
 </LinearLayout>

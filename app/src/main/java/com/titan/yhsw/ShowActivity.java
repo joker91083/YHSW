@@ -65,6 +65,12 @@ public class ShowActivity extends AppCompatActivity {
                 ShowActivity.this.finish();
             }
         });
+        binding.tvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ShowActivity.this.finish();
+            }
+        });
         try {
             //pest=getIntent().getBundleExtra("pest")
             pest = (Pest) getIntent().getExtras().getSerializable("pest");
@@ -83,6 +89,7 @@ public class ShowActivity extends AppCompatActivity {
                     }
                 });
             }
+            binding.tvTitle.setText(pest.getCname());
         }catch (Exception e){
             Toast.makeText(mContext,"初始化数据异常"+e,Toast.LENGTH_LONG);
         }

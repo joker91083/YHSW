@@ -72,11 +72,21 @@ public class LocalDataSource implements LDataSource {
 
                     }else {
                         for(String str:whbw){
-                            List<Pest> sublist=DaoManager.getInstance(TitanApplication.dbpath).getNewSession().getPestDao().queryBuilder()
-                                    .where(PestDao.Properties.Type.eq(type))
-                                    .whereOr(PestDao.Properties.Whbw.like("%"+str+"%"),PestDao.Properties.Cname.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%")
-                                            ,PestDao.Properties.Ename.like("%"+keyword+"%"),PestDao.Properties.Lname.like("%"+keyword+"%"))
-                                    .list();
+                            List<Pest> sublist=new ArrayList<>();
+                            if(type==3){
+                                 sublist=DaoManager.getInstance(TitanApplication.dbpath).getNewSession().getPestDao().queryBuilder()
+                                        .where(PestDao.Properties.Type.eq(type),PestDao.Properties.Host.like("%"+str+"%"))
+                                        .whereOr(PestDao.Properties.Cname.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%")
+                                                ,PestDao.Properties.Ename.like("%"+keyword+"%"),PestDao.Properties.Lname.like("%"+keyword+"%"))
+                                        .list();
+                            }else {
+                                 sublist=DaoManager.getInstance(TitanApplication.dbpath).getNewSession().getPestDao().queryBuilder()
+                                        .where(PestDao.Properties.Type.eq(type),PestDao.Properties.Whbw.like("%"+str+"%"))
+                                        .whereOr(PestDao.Properties.Cname.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%")
+                                                ,PestDao.Properties.Ename.like("%"+keyword+"%"),PestDao.Properties.Lname.like("%"+keyword+"%"))
+                                        .list();
+                            }
+
                             pestList.addAll(sublist);
                         }
                     }

@@ -11,46 +11,55 @@
         android:gravity="center"
         android:layout_gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:visibility="gone"
+        android:layout_height="55dp"
         >
         <TextView
-            android:id="@+id/tv_whbw"
-            android:text="@string/whbw"
+            android:id="@+id/tv_host"
+            android:text="@string/host"
             android:textColor="@color/colorPrimary"
             android:gravity="center"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />
+        <HorizontalScrollView
+            android:layout_toRightOf="@+id/tv_host"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+                <!--松树-->
+                <CheckedTextView
+                    android:id="@+id/ctv_ss"
+                    android:text="@string/host_ss"
+                    style="@style/ctv_whbw" />
+                <!--柏树-->
+                <CheckedTextView
+                    android:id="@+id/ctv_bs"
+                    android:text="@string/host_bs"
+                    style="@style/ctv_whbw"
+                    />
+                <!--杉树-->
+                <CheckedTextView
+                    android:id="@+id/ctv_shanshu"
+                    android:text="@string/host_shanshu"
+                    style="@style/ctv_whbw"
+                    />
+                <!--油茶-->
+                <CheckedTextView
+                    android:id="@+id/ctv_yc"
+                    android:text="@string/host_yc"
+                    style="@style/ctv_whbw"
+                    />
 
-        <CheckedTextView
-            android:layout_toRightOf="@+id/tv_whbw"
-            android:id="@+id/ctv_gs"
-            android:text="@string/whbw_gs"
-            style="@style/ctv_whbw" />
-        <CheckedTextView
-            android:id="@+id/ctv_yb"
-            android:layout_toRightOf="@+id/ctv_gs"
-            android:text="@string/whbw_yb"
-            style="@style/ctv_whbw"
-            android:layout_toEndOf="@+id/ctv_gs" />
-        <CheckedTextView
-            android:id="@+id/ctv_jb"
-            android:layout_toRightOf="@+id/ctv_yb"
-            android:text="@string/whbw_jb"
-            style="@style/ctv_whbw"
-            />
-        <CheckedTextView
-            android:id="@+id/ctv_gb"
-            android:layout_toRightOf="@+id/ctv_jb"
-            android:text="@string/whbw_gb"
-            style="@style/ctv_whbw"
-            />
+            </LinearLayout>
+
+        </HorizontalScrollView>
+
     </RelativeLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,7 +79,7 @@
                     android:gravity="center"
                     android:padding="4dp"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="15sp"
+                    android:textSize="18sp"
                     android:text="@string/jzsw_tj"/>
 
                 <TextView
@@ -81,7 +90,7 @@
                     android:paddingRight="4dp"
                     android:paddingBottom="4dp"
                     android:textColor="@color/grey"
-                    android:textSize="10sp"
+                    android:textSize="16sp"
                     android:text="@string/jzsw_ts"/>
 
                 <View
@@ -91,25 +100,16 @@
                     android:layout_marginRight="3dp"
                     android:background="@color/colorPrimary"/>
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/et_keyword"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:padding="5dp"
-                    android:background="@drawable/selector_bg"
-                    android:gravity="center"
-                    android:textColor="@color/grey"
-                    android:textColorHint="@color/grey_et"
-                    android:textSize="18sp"
+                    style="@style/et_search"
                     android:hint="@string/keyword"/>
+
 
                 <TextView
                     android:id="@+id/tv_select"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp"
@@ -117,7 +117,7 @@
                     android:padding="5dp"
                     android:gravity="center"
                     android:background="@drawable/button_select"
-                    android:textSize="14sp"
+                    android:textSize="18sp"
                     android:textColor="@color/white"
                     android:text="@string/select"/>
             </LinearLayout>
@@ -158,5 +158,4 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"/>
         </LinearLayout>
-    </ScrollView>
 </LinearLayout>

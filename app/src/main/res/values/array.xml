@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--寄主-->
+    <string-array name="host">
+        <item>油茶</item>
+        <item>松树</item>
+        <item>柏树</item>
+        <item>衫树</item>
+    </string-array>
+</resources>
