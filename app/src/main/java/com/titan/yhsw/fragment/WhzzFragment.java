@@ -17,8 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.titan.TitanApplication;
 import com.titan.data.source.Injection;
 import com.titan.data.source.local.LDataSource;
@@ -30,15 +28,9 @@ import com.titan.yhsw.MainActivity;
 import com.titan.yhsw.R;
 import com.titan.yhsw.ShowActivity;
 import com.titan.yhsw.SpaceItemDecoration;
-import com.titan.yhsw.adapter.BiologyAdapter;
 import com.titan.yhsw.adapter.PestAdapter;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -169,8 +161,9 @@ public class WhzzFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 String keyword = mEt_keyword.getText().toString();
-                if (keyword.equals("")) {
-                    Toast.makeText(mContext, "关键字不能为空", Toast.LENGTH_SHORT).show();
+                if (keyword.equals("")&& whbwset.isEmpty()) {
+                    queryPest("");
+                    //Toast.makeText(mContext, "请输入查询条件", Toast.LENGTH_SHORT).show();
                 } else {
                     queryPest(keyword);
                    /* showDatas.clear();
@@ -194,13 +187,14 @@ public class WhzzFragment extends Fragment {
             @Override
             public void onFailure(String info) {
                 Toast.makeText(mContext, "有害生物查询失败" + info, Toast.LENGTH_LONG).show();
+                showPest();
             }
 
             @Override
             public void onSuccess(List<Pest> data) {
                 if (data == null || data.isEmpty()) {
                     Toast.makeText(mContext, "未找到所需信息", Toast.LENGTH_LONG).show();
-
+                    showPest();
                 } else {
                     Toast.makeText(mContext, "查询到" + data.size() + "条数据", Toast.LENGTH_SHORT).show();
                     for (int i = 0; i < data.size(); i++) {
@@ -265,75 +259,10 @@ public class WhzzFragment extends Fragment {
     }
 
 
-    /**
-     * 设置数据
-     */
-    private void setData() {
-        if (showDatas.size() == 0) {
-            Toast.makeText(mContext, "未找到所需信息", Toast.LENGTH_SHORT).show();
-        } else {
-            //创建默认的线性LayoutManager, 竖直排布
-            LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-            mRv_whzz.setLayoutManager(layoutManager);
-            //如果可以确定每个item的高度是固定的，设置这个选项可以提高性能
-            mRv_whzz.setHasFixedSize(true);
-            //创建并设置Adapter
-            BiologyAdapter adapter = new BiologyAdapter(showDatas, mContext);
-            mRv_whzz.setAdapter(adapter);
 
-            mLl_num.setVisibility(View.VISIBLE);
-            mTv_num.setText(String.valueOf(showDatas.size()));
 
-            adapter.setItemClickListener(new BiologyAdapter.MyItemClickListener() {
-                @Override
-                public void onItemClick(View view, int position) {
-                    Intent intent = new Intent(mContext, ShowActivity.class);
-                    Biology biology = showDatas.get(position);
-                    intent.putExtra("Biology", biology);
-                    startActivity(intent);
-                }
-            });
-        }
-    }
 
-    /**
-     * 查找数据
-     */
-    private void checkData(String keyword) {
-        for (int i = 0; i < allDatas.size(); i++) {
-            if (allDatas.get(i).getCNAME().contains(keyword) ||
-                    allDatas.get(i).getENAME().contains(keyword) ||
-                    allDatas.get(i).getFEATURE().contains(keyword)) {
-                showDatas.add(allDatas.get(i));
-            }
-        }
-    }
 
-    /**
-     * 获取数据
-     */
-    private void getData() {
-        InputStream inputStream = getResources().openRawResource(R.raw.biology);
-        InputStreamReader inputStreamReader = null;
-        try {
-            inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
-        } catch (UnsupportedEncodingException e1) {
-            e1.printStackTrace();
-        }
-        BufferedReader reader = new BufferedReader(inputStreamReader);
-        StringBuffer sb = new StringBuffer("");
-        String line;
-        try {
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String sData = sb.toString();
-        allDatas = new Gson().fromJson(sData, new TypeToken<ArrayList<Biology>>() {
-        }.getType());
-    }
 
     /**
      * 接收MainActivity的Touch回调的对象

@@ -37,6 +37,12 @@ public class ImgDisplayActivity extends AppCompatActivity {
                 ImgDisplayActivity.this.finish();
             }
         });
+        binding.tvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ImgDisplayActivity.this.finish();
+            }
+        });
         try {
             //pest=getIntent().getBundleExtra("pest")
             pest = (Pest) getIntent().getExtras().getSerializable("pest");
@@ -48,6 +54,7 @@ public class ImgDisplayActivity extends AppCompatActivity {
                 //Uri uri=new Uri.parse(pest.getImgpath());
                 //binding.dv.s(pest.getImgpath());
             }
+            binding.tvTitle.setText(pest.getCname());
         }catch (Exception e){
             Toast.makeText(mContext,"获取图片信息失败"+e,Toast.LENGTH_LONG);
         }

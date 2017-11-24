@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="com.titan.ynsjy.login.LoginActivity">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="viewmodel"
+            type="com.titan.yhsw.login.LoginViewModel"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_login"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tv_sysname"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:text="@string/sysname"/>
+
+
+        <LinearLayout
+            android:id="@+id/ll_login"
+            android:layout_width="300dp"
+            android:layout_below="@+id/tv_sysname"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/bg_loginform"
+            android:orientation="vertical"
+            android:divider="@drawable/divider_horizontal"
+            android:showDividers="middle">
+            <EditText
+                android:id="@+id/et_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawablePadding="10dp"
+                android:background="@null"
+                android:textColorHint="@color/gray"
+                android:drawableStart="@{@drawable/ic_username}"
+                android:gravity="center_vertical"
+                android:hint="@string/username"
+                android:textColor="@color/black"
+                android:paddingStart="8dp"
+                android:text="@={viewmodel.username}"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:paddingLeft="8dp"
+                android:visibility="gone"
+                android:drawableLeft="@{@drawable/ic_username}" />
+
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:drawablePadding="10dp"
+                android:drawableStart="@{@drawable/ic_password}"
+                android:gravity="center_vertical"
+                android:hint="@string/password"
+                android:textColorHint="@color/gray"
+                android:inputType="textPassword"
+                android:lines="1"
+                android:textColor="@color/black"
+                android:maxLines="1"
+                android:paddingBottom="10dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="10dp"
+                android:text="@={viewmodel.password}"
+                android:drawableLeft="@{@drawable/ic_password}" />
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center|center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/ll_login"
+            android:background="@drawable/btn_login_selector"
+            android:onClick="@{()->viewmodel.onLogin()}"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textSize="18sp"/>
+    </RelativeLayout>
+</layout>
+

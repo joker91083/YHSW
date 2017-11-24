@@ -1,10 +1,10 @@
 package com.titan.model;
 
 import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
 import org.greenrobot.greendao.annotation.Transient;
+import org.greenrobot.greendao.annotation.Generated;
 
 import java.io.Serializable;
 
@@ -75,6 +75,8 @@ public class Pest implements Serializable{
 
     @Transient
     private boolean hasimg=false;
+
+
 
     @Generated(hash = 1362271006)
     public Pest(Long id, String cname, String lname, String ename, String alias,

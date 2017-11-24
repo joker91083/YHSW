@@ -13,16 +13,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoTitle">
         <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".ShowActivity">
+    </activity>
+        <activity android:name=".ImgDisplayActivity">
+        </activity>
+        <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ShowActivity">
-    </activity>
-        <activity android:name=".ImgDisplayActivity">
-        </activity>
+
     </application>
 
 </manifest>

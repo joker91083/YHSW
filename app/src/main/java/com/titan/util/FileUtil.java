@@ -45,18 +45,23 @@ public class FileUtil {
             fos.close();
         }else {
             file.mkdirs();
-            for (int i = 0; i <asset.length ; i++) {
-                InputStream is = context.getResources().getAssets().open(assetPath+"/"+asset[i]);
-                FileOutputStream fos = new FileOutputStream(filename+"/"+asset[i]);
-                byte[] buffer = new byte[1024];//8129
-                int count = 0;
+            if(new File(filename+"/"+asset[0]).exists()){
+                return;
+            }else {
+                for (int i = 0; i <asset.length ; i++) {
+                    InputStream is = context.getResources().getAssets().open(assetPath+"/"+asset[i]);
+                    FileOutputStream fos = new FileOutputStream(filename+"/"+asset[i]);
+                    byte[] buffer = new byte[1024];//8129
+                    int count = 0;
 
-                while ((count = is.read(buffer)) >= 0) {
-                    fos.write(buffer, 0, count);
+                    while ((count = is.read(buffer)) >= 0) {
+                        fos.write(buffer, 0, count);
+                    }
+                    is.close();
+                    fos.close();
                 }
-                is.close();
-                fos.close();
             }
+
         }
 
 
@@ -82,4 +87,5 @@ public class FileUtil {
         is.close();
         fos.close();
     }
+
 }

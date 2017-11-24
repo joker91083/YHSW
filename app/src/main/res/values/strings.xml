@@ -3,7 +3,7 @@
 
     <string name="yhsw">主要林业有害生物</string>
     <string name="whzz">林业有害生物查询</string>
-    <string name="jzsw">寄主查询</string>
+    <string name="jzsw">寄主生物查询</string>
     <string name="explain">Copyright 2017 贵州省森林病虫检疫防治站</string>
 
     <string name="keyword">请输入关键字...</string>
@@ -18,11 +18,21 @@
     <string name="whzz_ts">提示：可根据症状或危害状的特征，组合关键字</string>
 
     <string name="jzsw_tj">寄主生物条件</string>
-    <string name="jzsw_ts">提示：可根据寄主生物的描述，组合关键字</string>
+    <string name="jzsw_ts">提示：可根据寄主生物的名称，组合关键字</string>
 
     <string name="whbw_gs">果实</string>
     <string name="whbw_yb">叶部</string>
     <string name="whbw_jb">茎部</string>
     <string name="whbw_gb">根部</string>
     <string name="whbw">危害部位:</string>
+    <string name="login">登录</string>
+    <string name="app_version">版本号</string>
+    <string name="password">请输入密码</string>
+    <string name="username">请输入用户名</string>
+    <string name="host">常见寄主:</string>
+    <string name="host_ss">松树</string>
+    <string name="host_bs">柏树</string>
+    <string name="host_yc">油茶</string>
+    <string name="host_shanshu">杉树</string>
+    <string name="sysname">贵州省林业有害生物\n信息查询系统</string>
 </resources>

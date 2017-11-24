@@ -122,7 +122,7 @@ public class YhswFragment extends Fragment {
      */
     private void queryPest(final String keyword) {
         queryPests.clear();
-        Injection.provideDataRepository(getActivity()).queryPest(1, keyword,null, new LDataSource.qureyCalllback() {
+        Injection.provideDataRepository(getActivity()).queryMajorPest(4, new LDataSource.qureyCalllback() {
             @Override
             public void onFailure(String info) {
                 Toast.makeText(mContext, "查询病虫害失败"+info, Toast.LENGTH_LONG).show();
