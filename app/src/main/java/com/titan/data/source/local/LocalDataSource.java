@@ -61,9 +61,10 @@ public class LocalDataSource implements LDataSource {
                                     .where(PestDao.Properties.Type.eq(type))
                                     .whereOr(PestDao.Properties.Host.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%"))
                                     .list();
-                        }else {
+                        }else if(type==1) {
+                            //查询所有
                             pestList=DaoManager.getInstance(TitanApplication.dbpath+"/"+TitanApplication.DBNAME).getNewSession().getPestDao().queryBuilder()
-                                    .where(PestDao.Properties.Type.eq(type))
+                                    //.where(PestDao.Properties.Type.eq(type))
                                     .whereOr(PestDao.Properties.Cname.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%")
                                             ,PestDao.Properties.Ename.like("%"+keyword+"%"),PestDao.Properties.Lname.like("%"+keyword+"%"))
                                     .list();
@@ -79,9 +80,9 @@ public class LocalDataSource implements LDataSource {
                                         .whereOr(PestDao.Properties.Cname.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%")
                                                 ,PestDao.Properties.Ename.like("%"+keyword+"%"),PestDao.Properties.Lname.like("%"+keyword+"%"))
                                         .list();
-                            }else {
+                            }else if(type==1) {
                                  sublist=DaoManager.getInstance(TitanApplication.dbpath).getNewSession().getPestDao().queryBuilder()
-                                        .where(PestDao.Properties.Type.eq(type),PestDao.Properties.Whbw.like("%"+str+"%"))
+                                        .where(PestDao.Properties.Whbw.like("%"+str+"%"))
                                         .whereOr(PestDao.Properties.Cname.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%")
                                                 ,PestDao.Properties.Ename.like("%"+keyword+"%"),PestDao.Properties.Lname.like("%"+keyword+"%"))
                                         .list();
@@ -111,6 +112,51 @@ public class LocalDataSource implements LDataSource {
                     @Override
                     public void onError(Throwable e) {
                         Log.e("TITAN",e.toString());
+                        callback.onFailure(e.toString());
+
+                    }
+
+                    @Override
+                    public void onNext(List<Pest> pestList) {
+
+                        callback.onSuccess(pestList);
+                    }
+                });
+    }
+
+    @Override
+    public void queryMajorPest(final Integer type, final qureyCalllback callback) {
+
+        Observable.create(new Observable.OnSubscribe<List<Pest>>() {
+            @Override
+            public void call(Subscriber<? super List<Pest>> subscriber) {
+                try {
+                    //type 1：有害生物 3：寄主
+                    List<Pest> pestList = new ArrayList<>();
+
+
+                    pestList = DaoManager.getInstance(TitanApplication.dbpath + "/" + TitanApplication.DBNAME).getNewSession().getPestDao().queryBuilder()
+                            .where(PestDao.Properties.Type.eq(type))
+                            .list();
+
+
+                    subscriber.onNext(pestList);
+
+                } catch (Exception e) {
+                    subscriber.onError(e);
+                }
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<Pest>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.e("TITAN", e.toString());
                         callback.onFailure(e.toString());
 
                     }

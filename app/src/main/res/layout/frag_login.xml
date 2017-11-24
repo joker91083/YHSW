@@ -16,12 +16,23 @@
         android:background="@drawable/bg_login"
         android:gravity="center">
 
+        <TextView
+            android:id="@+id/tv_sysname"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:text="@string/sysname"/>
+
 
         <LinearLayout
             android:id="@+id/ll_login"
             android:layout_width="300dp"
+            android:layout_below="@+id/tv_sysname"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="50dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:background="@drawable/bg_loginform"

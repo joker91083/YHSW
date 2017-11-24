@@ -38,6 +38,11 @@ public class DataRepository implements LDataSource {
     }
 
     @Override
+    public void queryMajorPest(Integer type, qureyCalllback callback) {
+        mLocalDataSource.queryMajorPest(4,callback);
+    }
+
+    @Override
     public void getPestImg(String keyword, qureyImgCalllback callback) {
         mLocalDataSource.getPestImg(keyword,callback);
     }

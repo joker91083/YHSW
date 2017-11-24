@@ -61,6 +61,9 @@ public interface LDataSource {
     //查询病虫害
     void queryPest(Integer type, String keyword, Set<String> whbw, qureyCalllback callback);
 
+    //查询主要
+    void queryMajorPest(Integer type, qureyCalllback callback);
+
     //获取病虫害图片
     void getPestImg(String keyword,qureyImgCalllback callback);
 

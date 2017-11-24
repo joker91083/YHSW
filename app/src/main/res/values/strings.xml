@@ -34,4 +34,5 @@
     <string name="host_bs">柏树</string>
     <string name="host_yc">油茶</string>
     <string name="host_shanshu">杉树</string>
+    <string name="sysname">贵州省林业有害生物\n信息查询系统</string>
 </resources>
