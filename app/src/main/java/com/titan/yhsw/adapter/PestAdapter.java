@@ -48,9 +48,11 @@ public class PestAdapter extends RecyclerView.Adapter<PestAdapter.MyViewHolder> 
         holder.mTv_feature.setText(mDates.get(position).getFeature());
         if(mDates.get(position).isHasimg()){
 
-            Uri uri= Uri.parse("file://"+mDates.get(position).getImgpath());
+            Uri uri= Uri.parse("file://"+mDates.get(position).getImgpath().get(0).getPath());
             holder.sdv_img.setImageURI(uri);
             //holder.sdv_img.setImageBitmap(BitmapFactory.decodeFile(mDates.get(position).getImgpath()));
+        }else {
+            holder.sdv_img.setImageResource(R.drawable.none);
         }
     }
 

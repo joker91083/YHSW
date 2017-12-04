@@ -41,7 +41,8 @@ public class PestDao extends AbstractDao<Pest, Long> {
         public final static Property Type = new Property(14, String.class, "type", false, "TYPE");
         public final static Property Control = new Property(15, String.class, "control", false, "CONTROL");
         public final static Property Host = new Property(16, String.class, "host", false, "HOST");
-        public final static Property Whbw = new Property(17, String.class, "whbw", false, "WHBW");
+        public final static Property Address = new Property(17, String.class, "address", false, "ADDRESS");
+        public final static Property Whbw = new Property(18, String.class, "whbw", false, "WHBW");
     }
 
 
@@ -74,7 +75,8 @@ public class PestDao extends AbstractDao<Pest, Long> {
                 "\"TYPE\" TEXT," + // 14: type
                 "\"CONTROL\" TEXT," + // 15: control
                 "\"HOST\" TEXT," + // 16: host
-                "\"WHBW\" TEXT);"); // 17: whbw
+                "\"ADDRESS\" TEXT," + // 17: address
+                "\"WHBW\" TEXT);"); // 18: whbw
     }
 
     /** Drops the underlying database table. */
@@ -172,9 +174,14 @@ public class PestDao extends AbstractDao<Pest, Long> {
             stmt.bindString(17, host);
         }
  
+        String address = entity.getAddress();
+        if (address != null) {
+            stmt.bindString(18, address);
+        }
+ 
         String whbw = entity.getWhbw();
         if (whbw != null) {
-            stmt.bindString(18, whbw);
+            stmt.bindString(19, whbw);
         }
     }
 
@@ -267,9 +274,14 @@ public class PestDao extends AbstractDao<Pest, Long> {
             stmt.bindString(17, host);
         }
  
+        String address = entity.getAddress();
+        if (address != null) {
+            stmt.bindString(18, address);
+        }
+ 
         String whbw = entity.getWhbw();
         if (whbw != null) {
-            stmt.bindString(18, whbw);
+            stmt.bindString(19, whbw);
         }
     }
 
@@ -298,7 +310,8 @@ public class PestDao extends AbstractDao<Pest, Long> {
             cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14), // type
             cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15), // control
             cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16), // host
-            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17) // whbw
+            cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17), // address
+            cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18) // whbw
         );
         return entity;
     }
@@ -322,7 +335,8 @@ public class PestDao extends AbstractDao<Pest, Long> {
         entity.setType(cursor.isNull(offset + 14) ? null : cursor.getString(offset + 14));
         entity.setControl(cursor.isNull(offset + 15) ? null : cursor.getString(offset + 15));
         entity.setHost(cursor.isNull(offset + 16) ? null : cursor.getString(offset + 16));
-        entity.setWhbw(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
+        entity.setAddress(cursor.isNull(offset + 17) ? null : cursor.getString(offset + 17));
+        entity.setWhbw(cursor.isNull(offset + 18) ? null : cursor.getString(offset + 18));
      }
     
     @Override

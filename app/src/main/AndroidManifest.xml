@@ -22,10 +22,15 @@
         <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".main.ModulsActivity"
+            android:theme="@style/AppTheme"
+            android:label="@string/sys_name">
+
+        </activity>
+
 
     </application>
 

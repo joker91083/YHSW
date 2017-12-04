@@ -96,4 +96,11 @@
         <item>石榴</item>
         <item>紫薇</item>
     </string-array>
+    <!--系统模块-->
+    <string-array name="modules">
+        <item>林业有害生物查询</item>
+        <item>寄主植物查询</item>
+        <item>常见林业有害生物</item>
+        <item>系统介绍</item>
+    </string-array>
 </resources>

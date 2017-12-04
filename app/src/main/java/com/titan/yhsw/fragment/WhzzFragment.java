@@ -20,9 +20,9 @@ import android.widget.Toast;
 import com.titan.TitanApplication;
 import com.titan.data.source.Injection;
 import com.titan.data.source.local.LDataSource;
+import com.titan.model.Img;
 import com.titan.model.Pest;
 import com.titan.util.TitanFileFilter;
-import com.titan.yhsw.Biology;
 import com.titan.yhsw.ImgDisplayActivity;
 import com.titan.yhsw.MainActivity;
 import com.titan.yhsw.R;
@@ -71,9 +71,6 @@ public class WhzzFragment extends Fragment {
 
     Context mContext;
 
-    List<Biology> allDatas = new ArrayList<>();
-    List<Biology> showDatas = new ArrayList<>();
-
     //查询结果
     private List<Pest> queryPests = new ArrayList<>();
     //危害部位
@@ -105,10 +102,10 @@ public class WhzzFragment extends Fragment {
                 CheckedTextView checkedTextView = (CheckedTextView)v;
                 checkedTextView.toggle();
                 if(checkedTextView.isChecked()){
-                    whbwset.add("叶部");
+                    whbwset.add("叶");
                 }
                 else {
-                    whbwset.remove("叶部");
+                    whbwset.remove("叶");
                 }
             }
         });
@@ -119,10 +116,10 @@ public class WhzzFragment extends Fragment {
                 CheckedTextView checkedTextView = (CheckedTextView)v;
                 checkedTextView.toggle();
                 if(checkedTextView.isChecked()){
-                    whbwset.add("根部");
+                    whbwset.add("根");
                 }
                 else {
-                    whbwset.remove("根部");
+                    whbwset.remove("根");
                 }
             }
         });
@@ -133,10 +130,12 @@ public class WhzzFragment extends Fragment {
                 CheckedTextView checkedTextView = (CheckedTextView)v;
                 checkedTextView.toggle();
                 if(checkedTextView.isChecked()){
-                    whbwset.add("茎部");
+                    whbwset.add("枝");
+                    whbwset.add("干");
                 }
                 else {
-                    whbwset.remove("茎部");
+                    whbwset.remove("枝");
+                    whbwset.remove("干");
                 }
             }
         });
@@ -146,10 +145,10 @@ public class WhzzFragment extends Fragment {
                 CheckedTextView checkedTextView = (CheckedTextView)v;
                 checkedTextView.toggle();
                 if(checkedTextView.isChecked()){
-                    whbwset.add("果实");
+                    whbwset.add("果");
                 }
                 else {
-                    whbwset.remove("果实");
+                    whbwset.remove("果");
                 }
             }
         });
@@ -196,19 +195,35 @@ public class WhzzFragment extends Fragment {
                     Toast.makeText(mContext, "未找到所需信息", Toast.LENGTH_LONG).show();
                     showPest();
                 } else {
-                    Toast.makeText(mContext, "查询到" + data.size() + "条数据", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mContext, "查询到" + data.size() + "条数据", Toast.LENGTH_SHORT).show();
                     for (int i = 0; i < data.size(); i++) {
                         String imgforder = mContext.getDatabasePath(TitanApplication.IMGS).getAbsolutePath();
                         File file = new File(imgforder);
                         File[] files = file.listFiles(new TitanFileFilter.ImgFileFilter());
+                        List<Img> imgList=new ArrayList<>();
                         for (File f : files) {
-                            if (f.getName().contains(data.get(i).getCname())) {
+                            /*if(data.get(i).getCname().trim().equals("褐点粉灯蛾")){
+                                boolean dd=f.getName().trim().contains("褐点粉灯蛾");
+                                Log.e("dd", String.valueOf(dd));
+                               /* data.get(i).setHasimg(true);
+                                Img img=new Img();
+                                img.setPath(f.getAbsolutePath());
+                                img.setName(f.getName());
+                                imgList.add(img);
+                                data.get(i).setImgpath(imgList);
+                            }*/
+                            if(f.getName().trim().startsWith(data.get(i).getCname().trim())){
                                 data.get(i).setHasimg(true);
-                                data.get(i).setImgpath(f.getAbsolutePath());
+                                Img img=new Img();
+                                img.setPath(f.getAbsolutePath());
+                                img.setName(f.getName());
+                                imgList.add(img);
+                                data.get(i).setImgpath(imgList);
                             }
                         }
                     }
                     queryPests.addAll(data);
+
                     showPest();
 
 

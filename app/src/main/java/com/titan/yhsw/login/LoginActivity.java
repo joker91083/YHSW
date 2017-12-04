@@ -32,6 +32,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TitanApplication.addActivity(this);
         setContentView(R.layout.activity_login);
         sharedPreferences = TitanApplication.mSharedPreferences;
         mFragment = findOrCreateViewFragment();

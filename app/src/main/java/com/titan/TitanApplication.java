@@ -13,7 +13,9 @@ import com.titan.data.source.local.DaoManager;
 import com.titan.util.FileUtil;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 //import com.titan.data.source.local.GreenDaoManager;
 
@@ -49,6 +51,9 @@ public class TitanApplication extends Application {
 
     public static String dbpath="";
     public static String imgpath="";
+    //Activitylist
+    public static List<Activity> activityList = new ArrayList<>();
+
 
 
 
@@ -146,5 +151,22 @@ public class TitanApplication extends Application {
         return mContext;
     }
 
+
+    public void exit() {
+        for (Activity activity : activityList) {
+            if (activity != null) {
+                activity.finish();
+            }
+        }
+
+    }
+
+    /**
+     * 添加
+     * @param activity
+     */
+    public static void addActivity(Activity activity) {
+        activityList.add(activity);
+    }
 
 }

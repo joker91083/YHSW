@@ -76,7 +76,7 @@ public class ShowActivity extends AppCompatActivity {
             pest = (Pest) getIntent().getExtras().getSerializable("pest");
             binding.setPest(pest);
             if(pest.isHasimg()){
-                binding.ivPic.setImageBitmap(BitmapFactory.decodeFile(pest.getImgpath()));
+                binding.ivPic.setImageBitmap(BitmapFactory.decodeFile(pest.getImgpath().get(0).getPath()));
                 binding.ivPic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -89,7 +89,7 @@ public class ShowActivity extends AppCompatActivity {
                     }
                 });
             }
-            binding.tvTitle.setText(pest.getCname());
+            binding.tvTitle.setText(pest.getCname().trim());
         }catch (Exception e){
             Toast.makeText(mContext,"初始化数据异常"+e,Toast.LENGTH_LONG);
         }
@@ -98,28 +98,5 @@ public class ShowActivity extends AppCompatActivity {
         //initView();
     }
 
-    private void initView() {
 
-        Biology biology = (Biology)getIntent().getExtras().getSerializable("Biology");
-        mTv_title.setText(biology.getCNAME());
-
-        mTv_cname.setVisibility(View.VISIBLE);
-        mTv_cname.setText(biology.getCNAME());
-
-        mTv_ename.setVisibility(View.VISIBLE);
-        mTv_ename.setText(biology.getENAME());
-
-        mTv_door.setVisibility(View.VISIBLE);
-        mTv_door.setText(biology.getDOOR());
-
-        mTv_feature.setVisibility(View.VISIBLE);
-        mTv_feature.setText(biology.getFEATURE());
-
-        mIv_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-    }
 }

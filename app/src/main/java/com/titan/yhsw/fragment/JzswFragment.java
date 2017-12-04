@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.titan.TitanApplication;
 import com.titan.data.source.Injection;
 import com.titan.data.source.local.LDataSource;
+import com.titan.model.Img;
 import com.titan.model.Pest;
 import com.titan.util.TitanFileFilter;
 import com.titan.yhsw.HostAdapter;
@@ -42,7 +43,7 @@ import butterknife.ButterKnife;
 
 /**
  * Created by 32 on 2017/10/19.
- * 寄主生物查询
+ * 寄主植物查询
  */
 
 public class JzswFragment extends Fragment {
@@ -105,9 +106,9 @@ public class JzswFragment extends Fragment {
                 CheckedTextView checkedTextView = (CheckedTextView) v;
                 checkedTextView.toggle();
                 if (checkedTextView.isChecked()) {
-                    hostset.add("松树");
+                    hostset.add("松");
                 } else {
-                    hostset.remove("松树");
+                    hostset.remove("松");
                 }
             }
         });
@@ -117,9 +118,9 @@ public class JzswFragment extends Fragment {
                 CheckedTextView checkedTextView = (CheckedTextView) v;
                 checkedTextView.toggle();
                 if (checkedTextView.isChecked()) {
-                    hostset.add("柏树");
+                    hostset.add("柏");
                 } else {
-                    hostset.remove("柏树");
+                    hostset.remove("柏");
                 }
             }
         });
@@ -129,9 +130,9 @@ public class JzswFragment extends Fragment {
                 CheckedTextView checkedTextView = (CheckedTextView) v;
                 checkedTextView.toggle();
                 if (checkedTextView.isChecked()) {
-                    hostset.add("杉树");
+                    hostset.add("杉");
                 } else {
-                    hostset.remove("杉树");
+                    hostset.remove("杉");
                 }
             }
         });
@@ -179,27 +180,7 @@ public class JzswFragment extends Fragment {
 
     }
 
-    /**
-     * 寄主查询
-     */
-    private void queryHost(String keyword){
-        List<String> hostlist=new ArrayList<>();
-        String[] hostarr=mContext.getResources().getStringArray(R.array.host);
-        for (String host:hostarr) {
-            if(host.contains(keyword)){
-                hostlist.add(host);
-            }
-        }
-        showHostArray(hostlist);
-    }
 
-    /**
-     * 展示寄主查询结果
-     * @param hostlist
-     */
-    private void showHostArray(List<String> hostlist) {
-
-    }
 
     /**
      * 查询病虫害
@@ -223,16 +204,25 @@ public class JzswFragment extends Fragment {
                     showPest();
 
                 } else {
-                    Toast.makeText(mContext, "查询到" + data.size() + "条数据", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(mContext, "查询到" + data.size() + "条数据", Toast.LENGTH_SHORT).show();
                     for (int i = 0; i < data.size(); i++) {
                         String imgforder = mContext.getDatabasePath(TitanApplication.IMGS).getAbsolutePath();
                         File file = new File(imgforder);
                         File[] files = file.listFiles(new TitanFileFilter.ImgFileFilter());
+                        List<Img> imgList=new ArrayList<>();
                         for (File f : files) {
-                            if (f.getName().contains(data.get(i).getCname())) {
+                           if(f.getName().startsWith(data.get(i).getCname().trim())){
                                 data.get(i).setHasimg(true);
-                                data.get(i).setImgpath(f.getAbsolutePath());
+                                Img img=new Img();
+                                img.setPath(f.getAbsolutePath());
+                                img.setName(f.getName());
+                                imgList.add(img);
+                                data.get(i).setImgpath(imgList);
                             }
+                            /*if (f.getName().split("-")[0].equals(data.get(i).getCname())) {
+
+                                //data.get(i).setImgpath(f.getAbsolutePath());
+                            }*/
                         }
                     }
                     queryPests.addAll(data);
@@ -245,6 +235,7 @@ public class JzswFragment extends Fragment {
             }
         });
     }
+
 
     /**
      * 更新界面
@@ -268,9 +259,9 @@ public class JzswFragment extends Fragment {
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(mContext, ShowActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("pest", queryPests.get(position));
+                //bundle.putParcelable("pest", queryPests.get(position));
+                bundle.putSerializable("pest",queryPests.get(position));
                 intent.putExtras(bundle);
-
                 startActivity(intent);
             }
 

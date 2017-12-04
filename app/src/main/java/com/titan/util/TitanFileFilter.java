@@ -44,7 +44,7 @@ public class TitanFileFilter {
             else
             {
                 String name = file.getName();
-                if(name.endsWith(".jpg") || name.endsWith(".png"))
+                if(name.endsWith(".JPG")||name.endsWith(".jpg") || name.endsWith(".png")||name.endsWith(".PNG")||name.endsWith(".webp")||name.endsWith(".jpeg")||name.endsWith(".JPEG"))
                     return true;
                 else
                     return false;

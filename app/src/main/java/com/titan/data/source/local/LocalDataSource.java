@@ -58,15 +58,16 @@ public class LocalDataSource implements LDataSource {
                     if(whbw==null||whbw.isEmpty()){
                         if(type==3){
                             pestList=DaoManager.getInstance(TitanApplication.dbpath+"/"+TitanApplication.DBNAME).getNewSession().getPestDao().queryBuilder()
-                                    .where(PestDao.Properties.Type.eq(type))
-                                    .whereOr(PestDao.Properties.Host.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%"))
+                                    .where(PestDao.Properties.Host.like("%"+keyword+"%"),PestDao.Properties.Type.notEq(5))
+                                    //.whereOr(PestDao.Properties.Host.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%"))
                                     .list();
                         }else if(type==1) {
                             //查询所有
                             pestList=DaoManager.getInstance(TitanApplication.dbpath+"/"+TitanApplication.DBNAME).getNewSession().getPestDao().queryBuilder()
-                                    //.where(PestDao.Properties.Type.eq(type))
+                                    .where(PestDao.Properties.Type.notEq(5))
                                     .whereOr(PestDao.Properties.Cname.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%")
                                             ,PestDao.Properties.Ename.like("%"+keyword+"%"),PestDao.Properties.Lname.like("%"+keyword+"%"))
+                                    .orderAsc(PestDao.Properties.Type)
                                     .list();
                         }
 
@@ -76,16 +77,17 @@ public class LocalDataSource implements LDataSource {
                             List<Pest> sublist=new ArrayList<>();
                             if(type==3){
                                  sublist=DaoManager.getInstance(TitanApplication.dbpath).getNewSession().getPestDao().queryBuilder()
-                                        .where(PestDao.Properties.Type.eq(type),PestDao.Properties.Host.like("%"+str+"%"))
-                                        .whereOr(PestDao.Properties.Cname.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%")
-                                                ,PestDao.Properties.Ename.like("%"+keyword+"%"),PestDao.Properties.Lname.like("%"+keyword+"%"))
+                                        .where(PestDao.Properties.Host.like("%"+str+"%"),PestDao.Properties.Type.notEq(5))
                                         .list();
+                                 //.whereOr(PestDao.Properties.Cname.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%")
+                                               // ,PestDao.Properties.Ename.like("%"+keyword+"%"),PestDao.Properties.Lname.like("%"+keyword+"%"))
                             }else if(type==1) {
                                  sublist=DaoManager.getInstance(TitanApplication.dbpath).getNewSession().getPestDao().queryBuilder()
-                                        .where(PestDao.Properties.Whbw.like("%"+str+"%"))
+                                        .where(PestDao.Properties.Whbw.like("%"+str+"%"),PestDao.Properties.Type.notEq(5))
                                         .whereOr(PestDao.Properties.Cname.like("%"+keyword+"%"),PestDao.Properties.Cname.like("%"+keyword+"%")
                                                 ,PestDao.Properties.Ename.like("%"+keyword+"%"),PestDao.Properties.Lname.like("%"+keyword+"%"))
-                                        .list();
+                                         .orderAsc(PestDao.Properties.Type)
+                                         .list();
                             }
 
                             pestList.addAll(sublist);
@@ -133,13 +135,9 @@ public class LocalDataSource implements LDataSource {
                 try {
                     //type 1：有害生物 3：寄主
                     List<Pest> pestList = new ArrayList<>();
-
-
                     pestList = DaoManager.getInstance(TitanApplication.dbpath + "/" + TitanApplication.DBNAME).getNewSession().getPestDao().queryBuilder()
-                            .where(PestDao.Properties.Type.eq(type))
+                            .where(PestDao.Properties.Address.like("1"))
                             .list();
-
-
                     subscriber.onNext(pestList);
 
                 } catch (Exception e) {

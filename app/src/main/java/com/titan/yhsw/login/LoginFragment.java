@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.titan.yhsw.MainActivity;
 import com.titan.yhsw.databinding.FragLoginBinding;
+import com.titan.yhsw.main.ModulsActivity;
 
 
 /**
@@ -56,18 +56,13 @@ public class LoginFragment extends Fragment implements Login {
 
     @Override
     public void onNext() {
-        Intent intent = new Intent(mContext, MainActivity.class);
+        Intent intent = new Intent(mContext,ModulsActivity.class);
         startActivity(intent);
     }
 
     @Override
     public void showProgress() {
-        /*dialog = new MaterialDialog.Builder(mContext)
-                .content(mContext.getString(R.string.logging))
-                .progress(true, 0)
-                .cancelable(false)
-                .build();
-        dialog.show();*/
+
     }
 
     @Override

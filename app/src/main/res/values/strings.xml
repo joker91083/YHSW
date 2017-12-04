@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">有害生物查询</string>
+    <string name="sys_name">林业有害生物信息查询系统</string>
 
-    <string name="yhsw">主要林业有害生物</string>
+
+    <string name="yhsw">常见林业有害生物</string>
     <string name="whzz">林业有害生物查询</string>
-    <string name="jzsw">寄主生物查询</string>
+    <string name="jzsw">寄主植物查询</string>
     <string name="explain">Copyright 2017 贵州省森林病虫检疫防治站</string>
 
     <string name="keyword">请输入关键字...</string>
@@ -21,18 +23,26 @@
     <string name="jzsw_ts">提示：可根据寄主生物的名称，组合关键字</string>
 
     <string name="whbw_gs">果实</string>
-    <string name="whbw_yb">叶部</string>
-    <string name="whbw_jb">茎部</string>
-    <string name="whbw_gb">根部</string>
+    <string name="whbw_yb">叶</string>
+    <string name="whbw_jb">枝、干</string>
+    <string name="whbw_gb">根</string>
     <string name="whbw">危害部位:</string>
     <string name="login">登录</string>
     <string name="app_version">版本号</string>
     <string name="password">请输入密码</string>
     <string name="username">请输入用户名</string>
     <string name="host">常见寄主:</string>
-    <string name="host_ss">松树</string>
-    <string name="host_bs">柏树</string>
+    <string name="host_ss">松</string>
+    <string name="host_bs">柏</string>
     <string name="host_yc">油茶</string>
-    <string name="host_shanshu">杉树</string>
+    <string name="host_shanshu">杉</string>
     <string name="sysname">贵州省林业有害生物\n信息查询系统</string>
+    <string name="info">系统简介</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sysinfo">贵州省林业有害生物信息查询系统是由贵州省森林病虫检疫防治站
+    建设(以下简称系统),系统主要有林业有害生物查询、寄主植物、常见有害生物三个模块\n
+    林业有害生物查询：可以根据名称、危害部位等条件查询已入库林业有害生物的基本信息和图片\n
+    寄生植物: 可以根据寄主查询已入库寄生植物的基本信息和图片\n
+    常见有害生物: 可以查看已入库常见有害生物的基本信息和图片\n</string>
 </resources>
